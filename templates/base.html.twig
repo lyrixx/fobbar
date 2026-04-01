@@ -1,0 +1,52 @@
+{% set active = active|default('') %}
+<!DOCTYPE html>
+<html class="h-100">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}My Forum{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+        {% endblock %}
+    </head>
+    <body class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <div class="container">
+                {% block menu %}
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="{{ url('topic_index') }}">My Forum</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li class="nav-item ">
+                                        <a class="nav-link {{ 'topic' == active ? 'active' }}" href="{{ url('topic_index') }}">Top topics</a>
+                                    </li>
+                                </ul>
+                                <ul class="navbar-nav mb-2 mb-lg-0 d-flex">
+                                    <li class="nav-item ">
+                                        Hello
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                {% endblock %}
+                {% block body %}{% endblock %}
+            </div>
+        </main>
+        <footer class="footer mt-auto ">
+            <div class="container mt-3 py-3 bg-light">
+                <span class="text-muted">
+                    {{ 'now'|date('Y-m-d H:i:s') }}
+                </span>
+            </div>
+        </footer>
+
+        {% block javascripts %}
+            <script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

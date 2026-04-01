@@ -1,0 +1,28 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/reference.php
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+# Castor
+/.castor.stub.php
+/.home/
+/infrastructure/docker/docker-compose.override.yml
+/infrastructure/docker/services/router/certs/*.pem
+
+# Tools
+.php-cs-fixer.cache
+.twig-cs-fixer.cache
+
+# Projects
+/message.csv

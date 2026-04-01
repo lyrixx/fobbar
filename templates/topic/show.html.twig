@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="mb-3">
+            {{ topic.title }}
+        </h1>
+        <div>
+            <small class="badge rounded-pill bg-primary">{{ topic.messages|length }}</small>
+            {% for tag in topic.tags %}
+                <span class="badge bg-info text-dark">{{ tag.title }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% for message in topic.messages %}
+        <div class="card mb-2">
+            <div class="card-body">
+                {{ message.content }}
+            </div>
+            <div class="card-footer text-muted">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        {{ message.createdAt|format_date() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <a href="{{ url('message_new', {id: topic.id}) }}" class="btn btn-primary">
+        Reply
+    </a>
+{% endblock %}

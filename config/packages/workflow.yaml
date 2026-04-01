@@ -1,0 +1,31 @@
+framework:
+    workflows:
+        message:
+            type: 'state_machine'
+            marking_store:
+                type: 'method'
+                property: 'state'
+            supports:
+                - App\Entity\Message
+            initial_marking: 'draft'
+            places:
+                - 'draft'
+                - 'published'
+                - 'to_review'
+                - 'rejected'
+            transitions:
+                publish:
+                    from: 'draft'
+                    to: 'published'
+                request_review:
+                    from: 'published'
+                    to: 'to_review'
+                reject_review:
+                    from: 'to_review'
+                    to: 'rejected'
+                accept_review:
+                    from: 'to_review'
+                    to: 'published'
+                reject:
+                    from: 'published'
+                    to: 'rejected'

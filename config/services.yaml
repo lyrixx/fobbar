@@ -1,0 +1,22 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/**/Model/*'
+            - '../src/**/Messenger/Message/*'
+
+    # League\CommonMark\CommonMarkConverter:
+    #     arguments:
+    #         $config:
+    #             html_input: escape
+    #             allow_unsafe_links: false
+    #             max_nesting_level: 10
