@@ -15,4 +15,30 @@ class TopicRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Topic::class);
     }
+
+    public function findAllForHomepage(): array
+    {
+        return $this
+            ->createQueryBuilder('t')
+            ->select('new App\Repository\Model\ (t, count(m))')
+            ->leftJoin('t.messages', 'm')
+            ->groupBy('t')
+            ->orderBy('t.title', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findOneForShow(string $id): ?Topic
+    {
+        return $this
+            ->createQueryBuilder('t')
+            ->where('t.id = :id')->setParameter('id', $id)
+            ->leftJoin('t.messages', 'm')
+            ->leftJoin('t.tags', 'tags')
+            ->select('t', 'm', 'tags')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

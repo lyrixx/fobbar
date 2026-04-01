@@ -6,6 +6,7 @@ use App\Entity\Topic;
 use App\Form\Type\TopicType;
 use App\Repository\TopicRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +24,7 @@ class TopicController extends AbstractController
     #[Route('/', name: 'topic_index')]
     public function index(): Response
     {
-        $topics = $this->topicRepository->findAll();
+        $topics = $this->topicRepository->findAllForHomepage();
 
         return $this->render('topic/index.html.twig', [
             'topics' => $topics,
@@ -52,7 +53,10 @@ class TopicController extends AbstractController
     }
 
     #[Route('/{id}', name: 'topic_show')]
-    public function show(Topic $topic): Response
+    public function show(
+        #[MapEntity(expr: 'repository.findOneForShow(id)')]
+        Topic $topic,
+    ): Response
     {
         return $this->render('topic/show.html.twig', [
             'topic' => $topic,

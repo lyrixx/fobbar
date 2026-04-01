@@ -8,13 +8,14 @@
     </h1>
 
     <ul class="list-group mb-3">
-        {% for topic in topics %}
+        {% for topicInfo in topics %}
+            {% set topic = topicInfo.topic %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <a href="{{ url('topic_show', {id: topic.id}) }}">
                     {{ topic.title }}
                 </a>
                 <div>
-                    <span class="badge rounded-pill bg-primary">{{ topic.messages|length }}</span>
+                    <span class="badge rounded-pill bg-primary">{{ topicInfo.messageCount }}</span>
                     {# {% for tag in topic.tags %}
                         <span class="badge bg-info text-dark">{{ tag.title }}</span>
                     {% endfor %} #}
