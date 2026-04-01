@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Topic;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\Model\HomepageTopic;
 
 /**
  * @template-extends ServiceEntityRepository<Topic>
@@ -16,11 +17,14 @@ class TopicRepository extends ServiceEntityRepository
         parent::__construct($registry, Topic::class);
     }
 
+    /**
+     * @return array<HomepageTopic>
+     */
     public function findAllForHomepage(): array
     {
         return $this
             ->createQueryBuilder('t')
-            ->select('new App\Repository\Model\ (t, count(m))')
+            ->select('new App\Repository\Model\HomepageTopic(t, count(m))')
             ->leftJoin('t.messages', 'm')
             ->groupBy('t')
             ->orderBy('t.title', 'ASC')
