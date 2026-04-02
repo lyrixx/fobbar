@@ -58,7 +58,7 @@ function about(): void
     } catch (HttpExceptionInterface) {
     }
 
-    io()->listing(array_map(fn ($url) => "https://{$url}", array_unique($urls)));
+    io()->listing(array_map(static fn ($url) => "https://{$url}", array_unique($urls)));
 }
 
 #[AsTask(description: 'Opens the project in your browser', namespace: '', aliases: ['open'])]
@@ -547,8 +547,7 @@ function push(bool $dryRun = false): void
             targets = [%s]
         }
 
-        EOHCL
-        , implode(', ', array_map(fn ($target) => \sprintf('"%s"', $target['target']), $targets)));
+        EOHCL, implode(', ', array_map(static fn ($target) => \sprintf('"%s"', $target['target']), $targets)));
 
     foreach ($targets as $target) {
         $content .= \sprintf(<<<'EOHCL'
@@ -563,8 +562,7 @@ function push(bool $dryRun = false): void
                 }
             }
 
-            EOHCL
-            , $target['target'], $target['context'], $target['dockerfile'], $target['reference'], $target['type'], $target['reference'], $target['target'], variable('php_version'));
+            EOHCL, $target['target'], $target['context'], $target['dockerfile'], $target['reference'], $target['type'], $target['reference'], $target['target'], variable('php_version'));
     }
 
     if ($dryRun) {

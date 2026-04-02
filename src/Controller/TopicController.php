@@ -58,8 +58,7 @@ class TopicController extends AbstractController
     public function show(
         #[MapEntity(expr: 'repository.findOneForShow(id)')]
         Topic $topic,
-    ): Response
-    {
+    ): Response {
         return $this->render('topic/show.html.twig', [
             'topic' => $topic,
         ]);

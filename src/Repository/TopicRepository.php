@@ -3,9 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Topic;
+use App\Repository\Model\HomepageTopic;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Repository\Model\HomepageTopic;
 
 /**
  * @template-extends ServiceEntityRepository<Topic>

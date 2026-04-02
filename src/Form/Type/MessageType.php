@@ -45,7 +45,7 @@ class MessageType extends AbstractType
             'html_input' => 'escape',
             'allow_unsafe_links' => false,
             'max_nesting_level' => 10,
-        ]);;
+        ]);
 
         $message->contentCompiled = $converter->convert($message->content);
     }

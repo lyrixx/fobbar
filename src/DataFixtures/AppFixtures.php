@@ -25,7 +25,7 @@ class AppFixtures extends Fixture
         $topic = $this->createTopic('PHP');
         $topic->addTag($webDevTag);
         for ($i = 0; $i < 10; ++$i) {
-            $author = $i % 2 === 0 ? $alice : $bob;
+            $author = 0 === $i % 2 ? $alice : $bob;
             $this->createMessage($author, $topic, 'Message ' . $i);
         }
 

@@ -26,14 +26,14 @@ final class MessageVoter extends Voter
             return false;
         }
 
-        if ($attribute === 'MESSAGE_EDIT') {
+        if ('MESSAGE_EDIT' === $attribute) {
             if (!$subject instanceof Message) {
-                throw new \LogicException(sprintf('The "%s" attribute is only supported for instances of "%s", got "%s".', $attribute, Message::class, get_debug_type($subject)));
+                throw new \LogicException(\sprintf('The "%s" attribute is only supported for instances of "%s", got "%s".', $attribute, Message::class, get_debug_type($subject)));
             }
 
             return $user === $subject->author;
         }
 
-        throw new \LogicException(sprintf('The "%s" attribute is not supported.', $attribute));
+        throw new \LogicException(\sprintf('The "%s" attribute is not supported.', $attribute));
     }
 }
