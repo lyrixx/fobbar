@@ -30,6 +30,8 @@ class MessageController extends AbstractController
         $form->add('save', SubmitType::class);
 
         if ($form->handleRequest($request)->isSubmitted() && $form->isValid()) {
+
+
             $this->em->persist($message);
             $this->em->flush();
 

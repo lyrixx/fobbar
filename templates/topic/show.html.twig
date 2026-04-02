@@ -16,7 +16,12 @@
     {% for message in topic.messages %}
         <div class="card mb-2">
             <div class="card-body">
-                {{ message.content }}
+                {% if message.contentCompiled %}
+                    {{ message.contentCompiled|raw }}
+                {% else %}
+                    {{ message.content }}
+                {% endif %}
+
             </div>
             <div class="card-footer text-muted">
                 <div class="d-flex justify-content-between">
