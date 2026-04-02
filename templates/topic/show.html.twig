@@ -26,7 +26,13 @@
             <div class="card-footer text-muted">
                 <div class="d-flex justify-content-between">
                     <div>
-                        {{ message.createdAt|format_date() }}
+                        On {{ message.createdAt|format_date() }}
+                        By {{ message.author.username }}
+                    </div>
+                    <div>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a href="{{ url('message_edit', {id: message.id}) }}" class="btn btn-sm btn-secondary">Edit</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -34,6 +40,10 @@
     {% endfor %}
 
     <a href="{{ url('message_new', {id: topic.id}) }}" class="btn btn-primary">
-        Reply
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            Reply
+        {% else %}
+            Log in to reply
+        {% endif %}
     </a>
 {% endblock %}

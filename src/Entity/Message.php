@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MessageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
 class Message
@@ -33,7 +34,7 @@ class Message
 
     public function __construct(User $author, Topic $topic)
     {
-        $this->id = uuid_create();
+        $this->id = Uuid::v7()->toRfc4122();
         $this->topic = $topic;
         $this->author = $author;
         $this->createdAt = new \DateTimeImmutable();

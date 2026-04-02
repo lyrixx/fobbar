@@ -25,6 +25,11 @@
     </ul>
 
     <a href="{{ url('topic_new') }}" class="btn btn-primary">
-        Create a new topic
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            Create a new topic
+        {% else %}
+            Log in to create a new topic
+        {% endif %}
     </a>
+
 {% endblock %}

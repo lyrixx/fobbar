@@ -41,6 +41,7 @@ class TopicRepository extends ServiceEntityRepository
             ->leftJoin('t.messages', 'm')
             ->leftJoin('t.tags', 'tags')
             ->select('t', 'm', 'tags')
+            ->addOrderBy('m.id', 'ASC')
             ->getQuery()
             ->getOneOrNullResult()
         ;

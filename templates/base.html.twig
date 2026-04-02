@@ -31,10 +31,25 @@
                                         <a class="nav-link {{ 'topic' == active ? 'active' }}" href="{{ url('topic_index') }}">Top topics</a>
                                     </li>
                                 </ul>
-                                <ul class="navbar-nav mb-2 mb-lg-0 d-flex">
-                                    <li class="nav-item ">
-                                        Hello
-                                    </li>
+                                <ul class="navbar-nav">
+                                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                        <li class="nav-item">
+                                            <a class="nav-link disabled" aria-disabled="true">
+                                                Hello {{ app.user.username }}!
+                                            </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a class="nav-link" href="{{ url('app_logout') }}">Logout</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="nav-item ">
+                                            <a class="nav-link {{ 'login' == active ? 'active' }}" href="{{ url('app_login') }}">Login</a>
+                                        </li>
+                                        {# <li class="nav-item ">
+                                            <a class="nav-link {{ 'register' == active ? 'active' }}" href="{{ url('app_register') }}">Register</a>
+                                        </li> #}
+                                    {% endif %}
+
                                 </ul>
                             </div>
                         </div>

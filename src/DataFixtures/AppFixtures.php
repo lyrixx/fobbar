@@ -20,11 +20,13 @@ class AppFixtures extends Fixture
         $webDevTag = $this->createTag('web-dev');
 
         $alice = $this->createUser('alice');
+        $bob = $this->createUser('bob');
 
         $topic = $this->createTopic('PHP');
         $topic->addTag($webDevTag);
         for ($i = 0; $i < 10; ++$i) {
-            $this->createMessage($alice, $topic, 'Message ' . $i);
+            $author = $i % 2 === 0 ? $alice : $bob;
+            $this->createMessage($author, $topic, 'Message ' . $i);
         }
 
         $this->createMessage($alice, $topic, 'SHOULD NOT BE DISPLAYED', false);
