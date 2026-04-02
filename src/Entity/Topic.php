@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TopicRepository::class)]
 class Topic
@@ -16,6 +17,7 @@ class Topic
     #[ORM\Column(type: 'guid')]
     public string $id;
 
+    #[Assert\NotBlank()]
     #[Groups(['topic:read', 'topic:write'])]
     #[ORM\Column()]
     public string $title;

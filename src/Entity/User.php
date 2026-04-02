@@ -24,12 +24,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column()]
     public string $password;
 
+    #[ORM\Column(nullable: true)]
+    public ?string $newsletterToken = null;
+
     public function __construct(string $username, string $password)
     {
         $this->id = uuid_create();
         $this->username = $username;
         $this->password = $password;
         $this->roles = ['ROLE_USER'];
+        $this->newsletterToken = bin2hex(random_bytes(16));
     }
 
     /**

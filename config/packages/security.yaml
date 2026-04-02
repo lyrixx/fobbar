@@ -21,6 +21,8 @@ security:
                 enable_csrf: true
             logout:
                 path: app_logout
+            custom_authenticators:
+                - App\Security\NewsletterTokenAuthenticator
                 # where to redirect after logout
                 # target: app_any_route
 
