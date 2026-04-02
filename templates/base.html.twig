@@ -49,7 +49,6 @@
                                             <a class="nav-link {{ 'register' == active ? 'active' }}" href="{{ url('app_register') }}">Register</a>
                                         </li> #}
                                     {% endif %}
-
                                 </ul>
                             </div>
                         </div>
@@ -61,7 +60,7 @@
         <footer class="footer mt-auto ">
             <div class="container mt-3 py-3 bg-light">
                 <span class="text-muted">
-                    {{ 'now'|date('Y-m-d H:i:s') }}
+                    {{ render_esi(controller('App\\Controller\\TimeController::index')) }}
                 </span>
             </div>
         </footer>

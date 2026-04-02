@@ -5,9 +5,9 @@ framework:
     # Note that the session will be started ONLY if you read or write from it.
     session: true
 
+    esi: true
+    fragments: true
     http_cache: true
-    #esi: true
-    #fragments: true
 
 when@test:
     framework:
