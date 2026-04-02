@@ -46,7 +46,7 @@ class MessageController extends AbstractController
         ]);
     }
 
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    #[IsGranted('MESSAGE_EDIT', subject: 'message')]
     #[Route('/messages/{id}', name: 'message_edit')]
     public function edit(Request $request, #[MapEntity()] Message $message): Response
     {

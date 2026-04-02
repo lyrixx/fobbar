@@ -30,7 +30,7 @@
                         By {{ message.author.username }}
                     </div>
                     <div>
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {% if is_granted('MESSAGE_EDIT', message) %}
                             <a href="{{ url('message_edit', {id: message.id}) }}" class="btn btn-sm btn-secondary">Edit</a>
                         {% endif %}
                     </div>
