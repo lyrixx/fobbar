@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\MessageRepository;
+use App\Validator as AppAssert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
 class Message
@@ -23,6 +25,9 @@ class Message
     #[ORM\Column()]
     public \DateTimeImmutable $createdAt;
 
+    #[Assert\NotBlank()]
+    #[Assert\Length(max: 255)]
+    #[AppAssert\BannedWord()]
     #[ORM\Column()]
     public string $content;
 

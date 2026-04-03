@@ -37,7 +37,7 @@ class NewsletterTokenAuthenticator extends AbstractAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        $url = parse_url($request->getRequestUri(), PHP_URL_PATH);
+        $url = parse_url($request->getRequestUri(), \PHP_URL_PATH);
         $query = $request->query->all();
         unset($query['newsletterToken']);
 

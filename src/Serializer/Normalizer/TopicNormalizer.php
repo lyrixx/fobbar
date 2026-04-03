@@ -12,7 +12,7 @@ class TopicNormalizer implements NormalizerInterface
     public function __construct(
         #[Autowire(service: 'serializer.normalizer.object')]
         private NormalizerInterface $normalizer,
-        private MessageRepository $messageRepository
+        private MessageRepository $messageRepository,
     ) {
     }
 

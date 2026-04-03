@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: TopicRepository::class)]
 class Topic
@@ -18,6 +19,7 @@ class Topic
     public string $id;
 
     #[Assert\NotBlank()]
+    #[Assert\Length(max: 255)]
     #[Groups(['topic:read', 'topic:write'])]
     #[ORM\Column()]
     public string $title;
@@ -57,6 +59,23 @@ class Topic
     {
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
+        }
+    }
+
+    #[Assert\Callback()]
+    public function validateTitle(ExecutionContextInterface $context): void
+    {
+        if (!isset($this->title)) {
+            return;
+        }
+
+        if (\in_array(strtolower($this->title), ['admin', 'notification'], true)) {
+            $context
+                ->buildViolation('The title "{{ value }}" is not allowed.')
+                ->setParameter('{{ value }}', $this->title)
+                ->atPath('title')
+                ->addViolation()
+            ;
         }
     }
 }

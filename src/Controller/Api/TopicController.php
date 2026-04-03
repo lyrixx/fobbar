@@ -4,7 +4,6 @@ namespace App\Controller\Api;
 
 use App\Entity\Topic;
 use App\Repository\TopicRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,13 +41,13 @@ final class TopicController extends AbstractController
         $topic = $this
             ->serializer
             ->deserialize($request->getContent(), Topic::class, 'json', [
-                'groups' => ['topic:write']
+                'groups' => ['topic:write'],
             ])
         ;
 
         $errors = $this->validator->validate($topic);
 
-        if (count($errors)) {
+        if (\count($errors)) {
             $json = $this->serializer->serialize($errors, 'json');
 
             return new JsonResponse($json, 422, json: true);
@@ -82,7 +81,7 @@ final class TopicController extends AbstractController
 
         $errors = $this->validator->validate($topic);
 
-        if (count($errors)) {
+        if (\count($errors)) {
             $json = $this->serializer->serialize($errors, 'json');
 
             return new JsonResponse($json, 422, json: true);

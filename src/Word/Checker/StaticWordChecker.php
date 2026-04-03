@@ -6,9 +6,11 @@ use App\Word\WordCheckerInterface;
 
 class StaticWordChecker implements WordCheckerInterface
 {
-    private const BANNED_WORDS = [
+    private const array BANNED_WORDS = [
         'dog',
         'cat',
+        'chien',
+        'chat',
     ];
 
     public function isValid(string $word): bool
